@@ -35,7 +35,7 @@ double* compute_gradient_LOCAL(struct FitParams dat)
   #define MAXDIM nPrms
 #endif
 
-   double ths[MAXDIM];
+   double prms[MAXDIM];
    double a;
    double b[MAXDIM];
    double c[MAXDIM];
@@ -45,7 +45,7 @@ double* compute_gradient_LOCAL(struct FitParams dat)
    //Copy data to stack
    a = dat.a;
    for(int i=0; i<nPrms; i++){
-       ths[i] = dat.prms[i];
+       prms[i] = dat.prms[i];
        b[i] = dat.b[i];
        c[i] = dat.c[i];
    }
@@ -57,9 +57,9 @@ double* compute_gradient_LOCAL(struct FitParams dat)
    double f1s[MAXDIM];
    double f2s[MAXDIM];
    for(int i=0; i<nPrms; i++){
-       f0s[i] = (1 + cos(ths[i]))/2;
-       f1s[i] = sin(ths[i]);
-       f2s[i] = (1 - cos(ths[i]))/2;
+       f0s[i] = (1 + cos(prms[i]))/2;
+       f1s[i] = sin(prms[i])/2;
+       f2s[i] = (1 - cos(prms[i]))/2;
    }
    
    //-------------------------------------------------------
@@ -93,9 +93,9 @@ double* compute_gradient_LOCAL(struct FitParams dat)
    double f1derivs[MAXDIM];
    double f2derivs[MAXDIM];
    for(int i=0; i<nPrms; i++){
-       f0derivs[i] = -sin(ths[i])/2;
-       f1derivs[i] = cos(ths[i]);
-       f2derivs[i] = sin(ths[i])/2;
+       f0derivs[i] = -sin(prms[i])/2;
+       f1derivs[i] = cos(prms[i])/2;
+       f2derivs[i] = sin(prms[i])/2;
    }
    
    double aTermDerivs[MAXDIM];
